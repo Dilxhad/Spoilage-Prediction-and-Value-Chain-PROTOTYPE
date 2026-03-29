@@ -1,4 +1,4 @@
-# Agro Processing and Value Chain — Frontend
+# Agro Processing & Value Chain — Frontend
 
 React-based dashboard for the Agro Processing & Value Chain project. Connects to the FastAPI backend to display warehouse batch predictions, alerts, savings analysis and analytics.
 
