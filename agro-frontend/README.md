@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# AgroWatch — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React-based dashboard for the Agro Processing & Value Chain project. Connects to the FastAPI backend to display warehouse batch predictions, alerts, savings analysis and analytics.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Pages
 
-### `npm start`
+| Page | Route | Description |
+|------|-------|-------------|
+| Dashboard | `/` | Alert summary, ₹ savings, ethical score, charts |
+| Batch Monitor | `/batches` | All batches ranked by expiry with filters |
+| Analytics | `/analytics` | Charts — loss by category, action distribution, expiry histogram |
+| Predict | `/predict` | Form to predict expiry for a new batch in real time |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+- React 18
+- React Router DOM — page navigation
+- Recharts — data visualization
+- Tailwind CSS — styling
+- Fetch API — FastAPI communication
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js 16+
+- FastAPI backend running on `http://localhost:8000`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Setup
 
-### `npm run eject`
+### 1. Install dependencies
+```bash
+npm install
+npm install react-router-dom recharts
+npm install -D tailwindcss@3 postcss autoprefixer
+npx tailwindcss init -p
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 2. Start the app
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Opens at `http://localhost:3000`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Folder Structure
 
-## Learn More
+```
+src/
+├── App.jsx                  ← routing
+├── index.css                ← Tailwind imports
+├── api/
+│   └── index.js             ← all API calls to FastAPI
+├── components/
+│   └── Navbar.jsx           ← sidebar navigation
+└── pages/
+    ├── Dashboard.jsx        ← homepage with summary stats
+    ├── Batches.jsx          ← ranked batch list
+    ├── Analytics.jsx        ← charts and breakdown
+    └── Predict.jsx          ← new batch prediction form
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## API Connection
 
-### Code Splitting
+All API calls go to `http://localhost:8000`. Configured in `src/api/index.js`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Make sure the FastAPI backend is running before starting the frontend. See `../agro_api/README.md` for backend setup.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Features
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Real-time expiry predictions via FastAPI
+- Alert classification — Critical / Warning / Safe
+- Suggested actions — Priority Delivery / Charity / Discard / Monitor
+- Financial impact in ₹ — potential loss, recoverable revenue, net saving
+- Ethical score based on charity vs discard ratio
+- Category and alert level filters on batch list
+- Charts — alert distribution, loss by category, expiry histogram, action breakdown
